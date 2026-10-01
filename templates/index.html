@@ -29,17 +29,17 @@
                 <form method="post" action="/">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required value="{% if valores.get('nome')  %} {{ valores.get('nome') }} {% endif %}">
+                        <input type="text" class="form-control" id="nome" name="nome" required value="{% if erros  %} {{ valores.get('nome') }} {% endif %}">
                     </div>
                     <div class="mb-3">
                         <label for="peso" class="form-label">Peso (kg)</label>
                         <input type="number" class="form-control" id="peso" name="peso" step="0.01" min="1" max="300"
-                            required>
+                            required value="{% if erros  %} {{ valores.get('peso') }} {% endif %}">
                     </div>
                     <div class="mb-3">
                         <label for="altura" class="form-label">Altura (m)</label>
                         <input type="number" class="form-control" id="altura" name="altura" step="0.01" min="0.5"
-                            max="2.5" required>
+                            max="2.5" required value="{% if erros  %} {{ valores.get('peso') }} {% endif %}">
                     </div>
                     <button type="submit" class="btn btn-primary">Calcular IMC</button>
                 </form>
