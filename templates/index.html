@@ -29,7 +29,7 @@
                 <form method="post" action="/">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+                        <input type="text" class="form-control" id="nome" name="nome" required value="{% if valores.get('nome')  %} {{ valores.get('nome') }} {% endif %}">
                     </div>
                     <div class="mb-3">
                         <label for="peso" class="form-label">Peso (kg)</label>
@@ -46,17 +46,34 @@
             </div>
         </div>
 
+{% if erros %}
+
         <div class="card mt-4">
-            <div class="card-header">Resultado</div>
+            <div class="card-header">Ocorreu erros</div>
             <div class="card-body">
-                <div class="alert alert-success mb-0" role="alert">
-                    <h4 class="alert-heading">Nome da pessoa</h4>
-                    <p class="mb-1">Seu IMC é <strong>00,00</strong></p>
-                    <p class="mb-0">Faixa: <strong>Nome da faixa</strong></p>
+                <div class="alert alert-danger mb-0" role="alert">
+                    <p class="mb-1"><strong>{{ erros }}</strong></p>
                 </div>
             </div>
         </div>
+
+{% elif resposta %}
+
+        <div class="card mt-4">
+            <div class="card-header">Resultado</div>
+            <div class="card-body">
+                <div class="alert {{ resposta.get('cor') }} mb-0" role="alert">
+                    <h4 class="alert-heading">{{ valores.get('nome') }}</h4>
+                    <p class="mb-1">Seu IMC é <strong>{{ resposta.get('imc') }}</strong></p>
+                    <p class="mb-0">Faixa: <strong>{{ resposta.get('descricao') }}</strong></p>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
+
     </div>
+
 </body>
 
 </html>
